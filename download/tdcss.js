@@ -1,4 +1,4 @@
-/* tdcss.js - v0.6.0 - 2014-05-23
+/* tdcss.js - v0.6.0 - 2014-06-08
 * http://jakobloekke.github.io/tdcss.js/
 * Copyright (c) 2014 Jakob Løkke Madsen;
 * License: MIT */
@@ -155,7 +155,7 @@
 
                 if (fragment.type === "section") {
                     addNewSection(fragment.section_name);
-                    jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(fragment.section_name.replace(' ', '-').toLowerCase()) + '">' + fragment.section_name + '</option>';
+                    jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(_spacesToLowerCasedHyphenated(fragment.section_name)) + '">' + fragment.section_name + '</option>';
                 }
 
                 if (fragment.type === "snippet") {
@@ -169,8 +169,13 @@
             }
         }
 
+        function _spacesToLowerCasedHyphenated(str) {
+            str = str.replace(/\s+/g, '-').toLowerCase();
+            return str;
+        }
         function addNewSection(section_name) {
-            $(module.container).next(".tdcss-elements").append('<div class="tdcss-section" id="' + encodeURIComponent(section_name.replace(' ', '-').toLowerCase()) + '"><h2 class="tdcss-h2">' + section_name + '</h2></div>');
+            var sectionHyphenated = encodeURIComponent(_spacesToLowerCasedHyphenated(section_name));
+            $(module.container).next(".tdcss-elements").append('<div class="tdcss-section" id="' + encodeURIComponent(sectionHyphenated) + '"><h2 class="tdcss-h2">' + section_name + '</h2></div>');
         }
 
         function addNewSnippet(fragment) {
