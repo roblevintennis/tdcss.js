@@ -20,6 +20,7 @@
                 fragment_info_splitter: ";",
                 replacementContent: "...",
                 hideTextContent: false,
+                setCollapsedStateInUrl: true,
                 hideTheseAttributesContent: [
                     'src',
                     'href'
@@ -340,11 +341,15 @@
                         if (that.collapsed) {
                             $(that.header_element).addClass("is-collapsed");
                             $(that.fragments_in_section).hide();
-                            that.setCollapsedStateInUrl();
+                            if (settings.setCollapsedStateInUrl) {
+                                that.setCollapsedStateInUrl();
+                            }
                         } else {
                             $(that.header_element).removeClass("is-collapsed");
                             $(that.fragments_in_section).show();
-                            that.removeCollapsedStateFromUrl();
+                            if (settings.setCollapsedStateInUrl) {
+                                that.removeCollapsedStateFromUrl();
+                            }
                         }
                     };
 
